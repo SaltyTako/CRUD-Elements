@@ -12,7 +12,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-2" sizeof="25">
+                <form action="add.php" method="post">
                     <input type="submit" name="AddElement" class="btn btn-success btn-block" value="Añadir Elemento">
+                </form>
+                    
                 </div>
                 <div class="col-md-2" sizeof="25">
                     <input type="submit" name="SearchElement" class="btn btn-success btn-block" value="Buscar Elemento">

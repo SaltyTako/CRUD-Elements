@@ -24,4 +24,12 @@
         
         header("Location:index.php");
     }
+
+    if(isset($_POST['Save'])){
+
+    }else if(isset($_POST['Return'])){
+        header("Location:userpage.php");
+    }
+
+    //Here we could add another if statement for the Element
 ?>

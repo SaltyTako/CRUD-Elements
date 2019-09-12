@@ -2,7 +2,7 @@
     <form action="sv.php" method="post">
     <input type="text" name="Username" placeholder="Username or Email">
     <input type="password" name="Password" placeholder="Password">
-    <input type="submit" name="Login">
+    <input type="submit" name="Register">
     </form>
     <div>
     <form action="verifier.php" method="post">
