@@ -42,14 +42,11 @@
                         $search->execute();
                         $res = $search->get_result();
                         while($row = $res->fetch_assoc()){
-                            //At this point, we display al the elements
-                            //Now, it's time for a modal to pop-up and save some information
-                            //Testing new username
                             ?>
                             <tr>
                                 <td><?php echo$row['Nombre']; ?></td>
                                 <td><?php echo$row['Densidad']; ?></td>
-                                <td><?php echo$row['Peso']; ?></td>
+                                <td></td>
                                 <td></td>
                                 <td><?php echo$row['Time']; ?></td>
                             </tr>
