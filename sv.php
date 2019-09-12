@@ -22,6 +22,7 @@
             }
         }else{
             //message to session here
+            //Re-think this code
         }
         
         header("Location:index.php");
@@ -32,7 +33,12 @@
         $nm = $_POST['element_name'];
         $density = $_POST['density'];
         $weight = $_POST['weight'];
-        
+        $userid = $_SESSION['user_id'];
+        $elementsv->execute();
+        if(!$elementsv){
+            echo "Failed";
+        }
+        header("Location:userpage.php");
     }else if(isset($_POST['Return'])){
         header("Location:userpage.php");
     }
