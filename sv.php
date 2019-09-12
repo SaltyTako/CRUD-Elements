@@ -4,6 +4,8 @@
     //Prepared statement gotta test later
     $sve = $connection->prepare("INSERT INTO user(Nm, K) VALUES(?,?)");
     $sve->bind_param("ss",$sj,$ac);
+    $elementsv = $connection->prepare("INSERT INTO elementos(Nombre,Densidad,Peso,UserID) VALUES(?,?,?,?)");
+    $elementsv->bind_param("sddi",$nm,$density,$weight,$userid);
     //Execute
     if(isset($_POST['Login'])){
         $sj = $_POST['Username'];
@@ -26,7 +28,11 @@
     }
 
     if(isset($_POST['Save'])){
-
+        //here, we save the element to the server using the user's ID
+        $nm = $_POST['element_name'];
+        $density = $_POST['density'];
+        $weight = $_POST['weight'];
+        
     }else if(isset($_POST['Return'])){
         header("Location:userpage.php");
     }
