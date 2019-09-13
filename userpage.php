@@ -36,47 +36,57 @@
         </div>
         <div class="container">
             <div class="col-md-8">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Elemento</th>
-                            <th>Densidad</th>
-                            <th>Peso</th>
-                            <th>Volumen</th>
-                            <th>Fecha de creación</th>
-                        </tr>
-                        <!--Now, here goes the body, where we search for elements-->
-                        <tbody>
-                        <?php
-                        $search = $connection->prepare("SELECT * FROM elementos WHERE UserID = ?");
-                        $search->bind_param("i",$id);
-                        $search->execute();
-                        $res = $search->get_result();
-                        while($row = $res->fetch_assoc()){
-                            ?>
+                <form action="delete.php" method="post">
+                    <table class="table table-bordered">
+                        <thead>
                             <tr>
-                                <td><?php echo $row['Nombre']; ?></td>
-                                <td><?php echo $row['Densidad']; ?></td>
-                                <?php if(isset($_SESSION['factorw'])){ 
-                                    $showdens = $row['Densidad'] * $_SESSION['factorw'];
-                                }else{
-                                    $showdens = $row['Densidad'];
-                                } ?>
-                                <td><?php echo $showdens; ?></td>
-                                <?php if(isset($_SESSION['factorv'])){ 
-                                    $showvol = $row['Densidad'] * $_SESSION['factorv'];
-                                }else{
-                                    $showvol = $row['Densidad'];
-                                } ?>
-                                <td><?php echo $showvol; ?></td>
-                                <td><?php echo$row['Time']; ?></td>
+                                <th><input type="checkbox" name="allcheck" value="checkall"></th>
+                                <th>Elemento</th>
+                                <th>Densidad</th>
+                                <th>Peso</th>
+                                <th>Volumen</th>
+                                <th>Fecha de creación</th>
                             </tr>
-                            
-                        <?php }
-                        ?>
-                        </tbody>
-                    </thead>
-                </table>
+                            <!--Now, here goes the body, where we search for elements-->
+                            <tbody>
+                                
+                                    <?php
+                                    $search = $connection->prepare("SELECT * FROM elementos WHERE UserID = ?");
+                                    $search->bind_param("i",$id);
+                                    $search->execute();
+                                    $res = $search->get_result();
+                                    $numrows = 0;
+                                    while($row = $res->fetch_assoc()){
+                                        $numrows++;
+                                        ?>
+                                        <tr>
+                                            <td><input type="checkbox" name="check" value="<?php echo $row['ID'] ?>"></td>
+                                            <td><?php echo $row['Nombre']; ?></td>
+                                            <td><?php echo $row['Densidad']; ?></td>
+                                            <?php if(isset($_SESSION['factorw'])){ 
+                                                $showdens = $row['Densidad'] * $_SESSION['factorw'];
+                                            }else{
+                                                $showdens = $row['Densidad'];
+                                            } ?>
+                                            <td><?php echo $showdens; ?></td>
+                                            <?php if(isset($_SESSION['factorv'])){ 
+                                                $showvol = $row['Densidad'] * $_SESSION['factorv'];
+                                            }else{
+                                                $showvol = $row['Densidad'];
+                                            } ?>
+                                            <td><?php echo $showvol; ?></td>
+                                            <td><?php echo$row['Time']; ?></td>
+                                        </tr>
+                                        
+                                    <?php }
+                                    $_SESSION['numrows'] = $numrows;
+                                    ?>
+                                    
+                            </tbody>
+                        </thead>
+                    </table>
+                    <input type="submit" name="delete" value="Borrar seleccionados">
+                </form>
             </div>
         </div>
         
