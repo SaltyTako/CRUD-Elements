@@ -60,7 +60,7 @@
                                         $numrows++;
                                         ?>
                                         <tr>
-                                            <td><input type="checkbox" name="check" value="<?php echo $row['ID'] ?>"></td>
+                                            <td><input type="checkbox" name="check[]" value="<?php echo $row['ID'] ?>"></td>
                                             <td><?php echo $row['Nombre']; ?></td>
                                             <td><?php echo $row['Densidad']; ?></td>
                                             <?php if(isset($_SESSION['factorw'])){ 

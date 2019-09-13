@@ -16,6 +16,11 @@
             header("Location:userpage.php");
         }else{
             //Here goes the code for individual deletion
+            foreach($_POST['check'] as $selected){
+                $id = $selected;
+                $delete->execute();
+                header("Location:userpage.php");
+            }
         }
     }
 ?>
