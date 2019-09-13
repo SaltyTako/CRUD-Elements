@@ -12,14 +12,25 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-2" sizeof="25">
-                <form action="add.php" method="post">
-                    <input type="submit" name="AddElement" class="btn btn-success btn-block" value="Añadir Elemento">
-                </form>
-                    
+                    <form action="add.php" method="post">
+                        <input type="submit" name="AddElement" class="btn btn-success btn-block" value="Añadir Elemento">
+                    </form> 
                 </div>
                 <div class="col-md-2" sizeof="25">
                     <input type="submit" name="SearchElement" class="btn btn-success btn-block" value="Buscar Elemento">
                 </div>
+                    <form action="factors.php" method="post">
+                        <div class="col-md-2" sizeof="25">
+                            <input type="number" name="weightfactor" placeholder="Factor de peso" step="0.01" min=0>
+                        </div>
+                        <div  class="col-md-2" sizeof="25">
+                            <input type="number" name="volumefactor" placeholder="Factor de volumen" step="0.01" min=0>
+                        </div>
+                        <div  class="col-md-2" sizeof="25">
+                            <input type="submit" name="factors" class="btn btn-success btn-block" value="Guardar factores">
+                        </div>
+                    </form>
+                    
             </div>        
             <!--Elements from the table-->
         </div>
@@ -44,10 +55,20 @@
                         while($row = $res->fetch_assoc()){
                             ?>
                             <tr>
-                                <td><?php echo$row['Nombre']; ?></td>
-                                <td><?php echo$row['Densidad']; ?></td>
-                                <td></td>
-                                <td></td>
+                                <td><?php echo $row['Nombre']; ?></td>
+                                <td><?php echo $row['Densidad']; ?></td>
+                                <?php if(isset($_SESSION['factorw'])){ 
+                                    $showdens = $row['Densidad'] * $_SESSION['factorw'];
+                                }else{
+                                    $showdens = $row['Densidad'];
+                                } ?>
+                                <td><?php echo $showdens; ?></td>
+                                <?php if(isset($_SESSION['factorv'])){ 
+                                    $showvol = $row['Densidad'] * $_SESSION['factorv'];
+                                }else{
+                                    $showvol = $row['Densidad'];
+                                } ?>
+                                <td><?php echo $showvol; ?></td>
                                 <td><?php echo$row['Time']; ?></td>
                             </tr>
                             
