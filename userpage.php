@@ -42,7 +42,7 @@
         </div>
         <div class="container">
             <div class="col-md-8">
-                <form action="delete.php" method="post">
+                <form action="handler.php" method="post">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
