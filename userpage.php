@@ -30,6 +30,12 @@
                             <input type="submit" name="factors" class="btn btn-success btn-block" value="Guardar factores">
                         </div>
                     </form>
+                    <form action="search.php" method="post">
+                        <div class="col-md-2" sizeof="25">
+                            <input type="text" name="searchfield" placeholder="Buscar">
+                            <input type="submit" name="search" class="btn btn-success btn-block" value="Buscar elemento">
+                        </div>
+                    </form>
                     
             </div>        
             <!--Elements from the table-->
