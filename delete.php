@@ -22,5 +22,7 @@
                 header("Location:userpage.php");
             }
         }
+    }else if(isset($_POST['print'])){
+
     }
 ?>

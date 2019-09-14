@@ -91,7 +91,10 @@
                             </tbody>
                         </thead>
                     </table>
-                    <input type="submit" name="delete" value="Borrar seleccionados">
+                    <div class="col-md-4">
+                        <input type="submit" name="delete" class="btn btn-success btn-block" value="Borrar seleccionados">
+                        <input type="submit" name="print" class="btn btn-success btn-block" value="Imprimir seleccionados">
+                    </div>
                 </form>
             </div>
         </div>
