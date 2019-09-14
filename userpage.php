@@ -81,7 +81,7 @@
                                                 $showvol = $row['Densidad'];
                                             } ?>
                                             <td><?php echo $showvol; ?></td>
-                                            <td><?php echo$row['Time']; ?></td>
+                                            <td><?php echo $row['Time']; ?></td>
                                         </tr>
                                         
                                     <?php }
