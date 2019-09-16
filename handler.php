@@ -31,17 +31,13 @@
                     Tamaño de etiqueta
                     <div class="form-check">
                     <div class="form-check">
-                    <input class="form-check-input" type="radio" name="Radios" id="5x5" value="option1" checked>
-                    <label class="form-check-label" for="5x5">
-                        5x5
-                    </label>
+                    <input class="form-check-input" type="radio" name="Radios" value="5">
+                        5x5 <br>
                     </div>
                     <div class="form-check">
-                    <input class="form-check-input" type="radio" name="Radios" id="3x3" value="option2">
-                    <label class="form-check-label" for="3x3">
-                        3x3
-                    </label>
-                    </div>
+                    <input class="form-check-input" type="radio" name="Radios" value="3">
+                        3x3 <br>
+                   </div>
                     ¿Desea incluir fecha?
                     <input type="checkbox" name="date">
                     <input type="submit" name="print" class="btn btn-success btn-block" value="Imprimir">
