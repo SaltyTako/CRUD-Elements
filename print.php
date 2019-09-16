@@ -116,7 +116,79 @@
                     }
         }
         $pdf->Output();
+        unset($_SESSION['checkall']);
     }else if(isset($_SESSION['check'])){
-        
+        $userid = $_SESSION['user_id'];
+        $pdf->SetX(9);
+        $pdf->SetY(3);
+        $xbase = $pdf->GetX(); 
+        foreach($_SESSION['check'] as $selected){
+            $id = $selected;
+            $printone->execute();
+            $result = $printone->get_result();
+            $row = $result->fetch_assoc();
+            
+            $name = $row['Nombre'];
+              $density = $row['Densidad'];
+
+                    if(isset($_SESSION['factorw'])){ 
+
+                        $weight = $row['Densidad'] * $_SESSION['factorw'];
+
+                    }else{
+
+                        $weight = $row['Densidad'];
+
+                    }
+                    if(isset($_SESSION['factorv'])){
+
+                        $volume = $row['Densidad'] * $_SESSION['factorv'];
+
+                    }else{
+
+                        $volume = $row['Densidad']; 
+                    }
+                    //This string contains all the information, including date if required
+                    if($date == true){
+                        $date = $row['Time'];
+                    }else{
+                        $date = "";
+                    }
+                    $string = "$name\nDensidad: $density\nPeso: $weight\nVolumen: $volume\n$date";
+                
+                    $xpos = $pdf->GetX();
+                    $y = $pdf->GetY();
+                    //We need a way to know if it is 3x3, to adjust the y placement
+                    $pdf->MultiCell($sizeofcells,$sizeofcells/5,$string,1,'J',0);
+                    $x++;
+                    $tot++;
+                    if($x!=$cant){
+                        $pdf->SetXY($xpos+$sizeofcells,$y);
+                    }else if($x==$cant){
+                        if($tot == $total){
+                            //Here goes what to do in case we reached the max number of cells
+                            $pdf->AddPage();
+                            $x=0;
+                            $tot=0;
+                        }else{
+                            if($sizeofcells == 3 && $date == true){
+                                $pdf->SetXY($xbase,$y+$sizeofcells+0.6);
+                                $x=0;
+                            }else if($sizeofcells == 3 && $date == false){
+                                $pdf->SetXY($xbase,$y+$sizeofcells-0.6);
+                                $x=0;
+                            }else if($sizeofcells == 5 && $date == true){
+                                $pdf->SetXY($xbase,$y+$sizeofcells);
+                                $x=0;
+                            }else if($sizeofcells == 5 && $date == false){
+                                $pdf->SetXY($xbase,$y+$sizeofcells-1);
+                                $x=0;
+                            }
+                            
+                        }
+                    }
+        }
+        $pdf->Output();
+        unset($_SESSION['check']);
     }
 ?>

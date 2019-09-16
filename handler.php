@@ -50,6 +50,9 @@
                 $_SESSION['check'] = $_POST['check'];
             }else if(isset($_POST['allcheck'])){
                 $_SESSION['checkall'] = true;
+            }else if(isset($_POST['allcheck']) && isset($_POST['check'])){
+                //message to session, you can't select both
+                header("Location:userpage.php");
             }
         }else{
             //message to session, nothing to print
