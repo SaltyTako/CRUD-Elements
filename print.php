@@ -20,8 +20,12 @@
     if(isset($_POST['Radios'])){
         if($_POST['Radios'] == 5){
             $sizeofcells = 5;
+            $cant = 3;
+            $total = 12;
         }else if($_POST['Radios'] == 3){
             $sizeofcells = 3;
+            $cant = 5;
+            $total = 0;
         }
     }
 
@@ -38,6 +42,7 @@
     $printone = $connection->prepare("SELECT * FROM elementos WHERE ID=? AND UserID = ?");
     $printone->bind_param("ii",$id,$userid);
     $x = 0;
+    $tot = 0;
     //main if
     if(isset($_SESSION['checkall'])){
         $usid = $_SESSION['user_id'];
@@ -46,30 +51,54 @@
         
         $pdf->SetX(9);
         $pdf->SetY(3);
+        $xbase = $pdf->GetX();
         while($row = $print->fetch_assoc()){
-                $name = $row['Nombre'];
-                $density = $row['Densidad'];
-                if(isset($_SESSION['factorw'])){ 
-                    $weight = $row['Densidad'] * $_SESSION['factorw'];
-                }else{
-                    $weight = $row['Densidad'];
-                }
-                if(isset($_SESSION['factorv'])){
-                    $volume = $row['Densidad'] * $_SESSION['factorv'];
-                }else{
-                   $volume = $row['Densidad']; 
-                }
-                //This string contains all the information, including date if required
-                if($date == true){
-                    $date = $row['Time'];
-                }else{
-                    $date = "";
-                }
-                $string = "$name\n$density\n$weight\n$volume\n$date";
+                    $name = $row['Nombre'];
+                    $density = $row['Densidad'];
+
+                    if(isset($_SESSION['factorw'])){ 
+
+                        $weight = $row['Densidad'] * $_SESSION['factorw'];
+
+                    }else{
+
+                        $weight = $row['Densidad'];
+
+                    }
+                    if(isset($_SESSION['factorv'])){
+
+                        $volume = $row['Densidad'] * $_SESSION['factorv'];
+
+                    }else{
+
+                        $volume = $row['Densidad']; 
+                    }
+                    //This string contains all the information, including date if required
+                    if($date == true){
+                        $date = $row['Time'];
+                    }else{
+                        $date = "";
+                    }
+                    $string = "$name\nDensidad: $density\nPeso: $weight\nVolumen: $volume\n$date";
                 
-                
-                $pdf->MultiCell($sizeofcells,$sizeofcells/5,$string,1,'J',0);
-                //for some reason, it doesnt print here
+                    $xpos = $pdf->GetX();
+                    $y = $pdf->GetY();
+                    $pdf->MultiCell($sizeofcells,$sizeofcells/5,$string,1,'J',0);
+                    $x++;
+                    $tot++;
+                    if($x!=$cant){
+                        $pdf->SetXY($xpos+$sizeofcells,$y);
+                    }else if($x==$cant){
+                        if($tot == $total){
+                            //Here goes what to do in case we reached the max number of cells
+                            $pdf->AddPage();
+                            $x=0;
+                            $tot=0;
+                        }else{
+                            $pdf->SetXY($xbase,$y+$sizeofcells);
+                            $x=0;
+                        }
+                    }
         }
         $pdf->Output();
     }else if(isset($_SESSION['check'])){
