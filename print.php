@@ -14,8 +14,6 @@
     //Inside checkall, we run 2 things
     //first, a while statement, that updates the mysql data every sixth time
     //second, a for statement, that runs 5 times
-    
-    $sizeofcells = 3;
 
     if(isset($_POST['Radios'])){
         if($_POST['Radios'] == 5){
@@ -25,7 +23,7 @@
         }else if($_POST['Radios'] == 3){
             $sizeofcells = 3;
             $cant = 5;
-            $total = 0;
+            $total = 30;
         }
     }
 
@@ -33,6 +31,10 @@
         $date = true;
     }else{
         $date = false;
+    }
+
+    if($date == false && $sizeofcells ==3){
+        $total = 45;
     }
     //Prepared statements
     //all
@@ -83,6 +85,7 @@
                 
                     $xpos = $pdf->GetX();
                     $y = $pdf->GetY();
+                    //We need a way to know if it is 3x3, to adjust the y placement
                     $pdf->MultiCell($sizeofcells,$sizeofcells/5,$string,1,'J',0);
                     $x++;
                     $tot++;
@@ -95,13 +98,25 @@
                             $x=0;
                             $tot=0;
                         }else{
-                            $pdf->SetXY($xbase,$y+$sizeofcells);
-                            $x=0;
+                            if($sizeofcells == 3 && $date == true){
+                                $pdf->SetXY($xbase,$y+$sizeofcells+0.6);
+                                $x=0;
+                            }else if($sizeofcells == 3 && $date == false){
+                                $pdf->SetXY($xbase,$y+$sizeofcells-0.6);
+                                $x=0;
+                            }else if($sizeofcells == 5 && $date == true){
+                                $pdf->SetXY($xbase,$y+$sizeofcells);
+                                $x=0;
+                            }else if($sizeofcells == 5 && $date == false){
+                                $pdf->SetXY($xbase,$y+$sizeofcells-1);
+                                $x=0;
+                            }
+                            
                         }
                     }
         }
         $pdf->Output();
     }else if(isset($_SESSION['check'])){
-
+        
     }
 ?>

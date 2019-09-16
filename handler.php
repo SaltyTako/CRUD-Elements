@@ -31,7 +31,7 @@
                     Tamaño de etiqueta
                     <div class="form-check">
                     <div class="form-check">
-                    <input class="form-check-input" type="radio" name="Radios" value="5">
+                    <input class="form-check-input" type="radio" name="Radios" value="5" checked>
                         5x5 <br>
                     </div>
                     <div class="form-check">
