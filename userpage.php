@@ -13,7 +13,6 @@
             <div class="offset-md-1 row-md-4">
             <h2>Bienvenido/a <?php echo $name ?></h2>
             </div>
-            
             <hr>
             <!--Elements from the table-->
         </div>
@@ -84,6 +83,12 @@
                                     <input type="submit" name="print" class="btn btn-success btn-block" value="Imprimir seleccionados">
                                 </div>
                             </div>
+                    </form>
+                    <form action="logout.php" method="post">
+                    <div class="form-group">
+                    <input type="submit" name="logout" class="btn btn-danger" value="Cerrar sesion">
+                    </div>
+
                     </form>
                 </div>
                 <div class="col-md-4">
