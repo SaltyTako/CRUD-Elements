@@ -117,8 +117,7 @@
                             }
                         }
             }
-            $pdf->Output();
-            unset($_SESSION['checkall']);
+            $pdf->Output('D','Elementos.pdf',true);
         }else if(isset($_SESSION['check'])){
             $userid = $_SESSION['user_id'];
             $pdf->SetX(9);
@@ -190,11 +189,12 @@
                             }
                         }
             }
-            $pdf->Output();
-            unset($_SESSION['check']);
+            $pdf->Output('D','Elementos.pdf',true);
         }
     }else if(isset($_POST['cancel'])){
         header("Location:userpage.php");
+        unset($_SESSION['check']);
+        unset($_SESSION['checkall']);
     }
 
     
