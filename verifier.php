@@ -19,20 +19,27 @@
         $defid = $row['ID'];
     }
     
-    if($defUsername == $retrieveus){
-        if(password_verify($retrievepass,$defPass)){
-            //Head to userpage
-            header("Location:userpage.php");
-            //Set username for userpage
-            $_SESSION['user_name']=$defUsername;
-            $_SESSION['user_id']=$defid;
-            exit();
-        }else{
-            //Head to index with session message
-            header("Location:index.php");
-            exit();
+    if(empty($defUsername)){
+        //User doesn't exist
+        header("Location:index.php");
+    }else{
+        if($defUsername == $retrieveus){
+            if(password_verify($retrievepass,$defPass)){
+                //Head to userpage
+                header("Location:userpage.php");
+                //Set username for userpage
+                $_SESSION['user_name']=$defUsername;
+                $_SESSION['user_id']=$defid;
+                exit();
+            }else{
+                //Head to index with session message, user doesn't match
+                header("Location:index.php");
+                exit();
+            }
         }
     }
+
+    
     
 
 ?>
