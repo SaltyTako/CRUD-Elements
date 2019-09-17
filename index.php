@@ -1,7 +1,7 @@
 <?php include('includes/header.php'); ?>
 
     <div class="container-fluid text-center">
-        
+        <br>
         <div class="row">
             <div class="offset-md-5 row-md-4">
                 <h2>Registrarse</h2>

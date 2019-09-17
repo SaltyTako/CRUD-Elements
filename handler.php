@@ -12,10 +12,13 @@
     $usid = $_SESSION['user_id'];
 
     if(isset($_POST['delete'])){
-        if(isset($_POST['allcheck'])){
+        if(isset($_POST['allcheck']) && isset($_POST['check'])){
+            //message to session, you can't check both
+            header("Location:userpage.php");
+        }else if(isset($_POST['allcheck']) && !isset($_POST['check'])){
             $deleteall->execute();
             header("Location:userpage.php");
-        }else{
+        }else if(isset($_POST['check']) && !isset($_POST['allcheck'])){
             //Here goes the code for individual deletion
             foreach($_POST['check'] as $selected){
                 $id = $selected;
@@ -24,26 +27,41 @@
             }
         }
     }else if(isset($_POST['print'])){
-        if(isset($_POST['check']) || isset($_POST['allcheck'])){
+        if(isset($_POST['check']) && isset($_POST['allcheck'])){
+            //message to session, you can't do both
+            header("Location:userpage.php");
+        }else if(isset($_POST['check']) || isset($_POST['allcheck'])){
                 ?>
-                <form action="print.php" method="post">
-                <div class="container">
-                    Tamaño de etiqueta
-                    <div class="form-check">
-                    <div class="form-check">
-                    <input class="form-check-input" type="radio" name="Radios" value="5" checked>
-                        5x5 <br>
+                
+                <div class="container-fluid text-center">
+
+                    <div class="row">
+                        <div class="offset-md-5 row-md-4">
+                            <form action="print.php" method="post">
+                                <br>
+                                Tamaño de etiqueta
+                                <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Radios" value="5" checked>
+                                    5x5 <br>
+                                </div>
+                                <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Radios" value="3">
+                                    3x3 <br>
+                                </div>
+                                ¿Desea incluir fecha?   <input type="checkbox" name="date">
+
+                                <div class="form-group">
+                                    <input type="submit" name="print" class="btn btn-success btn-block" value="Imprimir">
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" name="cancel" class="btn btn-success btn-block" value="Cancelar">
+                                </div>
+                            </form>    
+                        </div>
                     </div>
-                    <div class="form-check">
-                    <input class="form-check-input" type="radio" name="Radios" value="3">
-                        3x3 <br>
-                   </div>
-                    ¿Desea incluir fecha?
-                    <input type="checkbox" name="date">
-                    <input type="submit" name="print" class="btn btn-success btn-block" value="Imprimir">
-                    <input type="submit" name="cancel" class="btn btn-success btn-block" value="Cancelar">
+ 
                 </div>
-            </form>
+           
             <?php
             //Here, we save the "check" values for further use
             if(isset($_POST['check'])){
@@ -54,9 +72,6 @@
                 //message to session, you can't select both
                 header("Location:userpage.php");
             }
-        }else{
-            //message to session, nothing to print
-            header("Location:userpage.php");
         }
         
         

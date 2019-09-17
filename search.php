@@ -19,6 +19,9 @@
                 ?>
                     <div class="container">
                         <div class="col-md-8">
+                        <br>
+                        <h2>Resultados de la búsqueda</h2>
+                        <hr>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -56,7 +59,7 @@
                                 </thead>
                             </table>
                             <form action="userpage.php">
-                            <input type="submit" value="Regresar">
+                            <input class="btn btn-primary" type="submit" value="Regresar">
                             </form>
                         </div>
                     </div>
