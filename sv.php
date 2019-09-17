@@ -7,7 +7,7 @@
     $elementsv = $connection->prepare("INSERT INTO elementos(Nombre,Densidad,UserID) VALUES(?,?,?)");
     $elementsv->bind_param("sdi",$nm,$density,$userid);
     //Execute
-    if(isset($_POST['Login'])){
+    if(isset($_POST['Register'])){
         $sj = $_POST['Username'];
         $unpac = $_POST['Password'];
         $dup = mysqli_query($connection,"SELECT Nm FROM user WHERE Nm = '$sj'");
