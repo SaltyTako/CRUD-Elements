@@ -25,6 +25,9 @@
                 $delete->execute();
                 header("Location:userpage.php");
             }
+        }else{
+            //Message to session, nothing selected
+            header("Location:userpage.php");
         }
     }else if(isset($_POST['print'])){
         if(isset($_POST['check']) && isset($_POST['allcheck'])){
@@ -72,6 +75,9 @@
                 //message to session, you can't select both
                 header("Location:userpage.php");
             }
+        }else{
+            //Message to session, none selected
+            header("Location:userpage.php");
         }
         
         
