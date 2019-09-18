@@ -30,14 +30,22 @@
 
     if(isset($_POST['Save'])){
         //here, we save the element to the server using the user's ID
-        $nm = $_POST['element_name'];
-        $density = $_POST['density'];
-        $userid = $_SESSION['user_id'];
-        $elementsv->execute();
-        if(!$elementsv){
+        if(empty($_POST['element_name']) || empty($_POST['density']))
+        {
+            //message to session, nothing to save
+            header("Location:userpage.php");
+        }else if(isset($_POST['element_name']) && isset($_POST['density'])){
+            $nm = $_POST['element_name'];
+            $density = $_POST['density'];
+            $userid = $_SESSION['user_id'];
+            $elementsv->execute();
+            
+            if(!$elementsv){
             echo "Failed";
+            }
+            header("Location:userpage.php");
         }
-        header("Location:userpage.php");
+        
     }else if(isset($_POST['Return'])){
         header("Location:userpage.php");
     }
