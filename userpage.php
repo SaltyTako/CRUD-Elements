@@ -32,7 +32,7 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th><input type="checkbox" name="allcheck" value="checkall"></th>
+                                    <th><input id="all" type="checkbox" name="allcheck" value="checkall"></th>
                                     <th>Elemento</th>
                                     <th>Densidad</th>
                                     <th>Peso</th>
@@ -91,6 +91,7 @@
                                 </div>
                             </div>
                     </form>
+                            
                     <form action="logout.php" method="post">
                     <div class="form-group">
                     <input type="submit" name="logout" class="btn btn-danger" value="Cerrar sesion">
