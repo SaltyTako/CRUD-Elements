@@ -38,6 +38,7 @@
                                     <th>Peso</th>
                                     <th>Volumen</th>
                                     <th>Fecha de creación</th>
+                                    <th>Editar</th>
                                 </tr>
                                 <!--Now, here goes the body, where we search for elements-->
                                 <tbody>
@@ -68,6 +69,12 @@
                                                 } ?>
                                                 <td><?php echo $showvol; ?></td>
                                                 <td><?php echo $row['Time']; ?></td>
+                                                <td>
+                                                <a href="edit.php?ID=<?php echo $row['ID']; ?>" class="btn btn-secondary">
+                                                    <i class="fas fa-marker"></i>
+                                                </a>
+                                                </td>
+                                                
                                             </tr>
                                             
                                         <?php }
@@ -106,8 +113,23 @@
 
                         <div class="form-group">
                             <input type="submit" name="factors" class="btn btn-success btn-block" value="Guardar factores">
-                        </div>    
-                     
+                        </div>
+                        <!--Actual Factor Display-->
+                        <label for="factors">Factores actuales:</label> <br>
+                        <label for="factors">Peso : <?php 
+                        if(isset($_SESSION['factorw'])){
+                            echo $_SESSION['factorw'];
+                        }else{
+                            echo 0;
+                        }
+                        ?></label> <br>
+                        <label for="factors">Volumen : <?php 
+                        if(isset($_SESSION['factorv'])){
+                            echo $_SESSION['factorv'];
+                        }else{
+                            echo 0;
+                        }
+                        ?></label>
                     </form> 
                     <form action="search.php" method="post">
                             <div class="form-group">
